@@ -133,4 +133,55 @@ class DoublyLinkedList {
         // }
         // return ++this.length;
     }
+
+    get(idx){
+        // TEACHERS SOLUTION
+        if(idx < 0 || idx >=this.length){
+            return false;
+        }
+        let count, current;
+        if(idx <= this.length / 2){
+            count = 0;
+            current = this.head;
+            while(count!== idx){
+                current = current.next;
+                count++;
+            }
+        } else{
+            count = this.length-1;
+            current = this.tail;
+            while(count!==idx){
+                current = current.previous;
+                count--;
+            }
+        }
+
+        return current;
+
+        // if(idx < 0 || idx > this.length){
+        //     return false
+        // }
+        // if (idx===0){
+        //     return this.head;
+        // }
+        // let foundNode = this.head;
+        // let counter = 0;
+
+        // if (idx >= Math.ceil(this.length/2)) {
+        //     console.log('working from end');
+        //     foundNode = this.tail;
+        //     counter = this.length;
+        //     while(idx!==counter){
+        //         foundNode = foundNode.previous;
+        //         counter--;
+        //     }
+        // } else{
+        //     console.log('working from start');
+        //     while(idx!==counter){
+        //         foundNode = foundNode.next;
+        //         counter++;
+        //     }
+        // }
+        // return foundNode;
+    }
 }

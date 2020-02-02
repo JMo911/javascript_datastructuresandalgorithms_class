@@ -184,4 +184,106 @@ class DoublyLinkedList {
         // }
         // return foundNode;
     }
+    //SET TAKES IN AN INDEX AND A VALUE TO UPDATE THE NODE AT THAT INDEX WITH...
+    set(idx, value){
+        //USE GET TO MAKE THIS EASIER.
+        //TEACHERS SOLUTION
+        let foundNode = this.get(idx);
+        if(foundNode){
+            foundNode.value = value;
+            return true;
+        }
+        return false;
+        
+        
+        // if (this.get(idx)){
+        //     let foundNode = this.get(idx);
+        //     foundNode.value = value;
+        //     return true;
+        // }else{
+        //     return false;
+        // }
+    }
+    //INSERT, TAKES IN INDEX AND VALUE, CREATE A NEW NODE WITH THE PASSED IN VALUE, INSERT IT INTO LIST IN THAT POSITION
+    insert(idx, value){
+        //TEACHERS SOLUTION
+        if (idx < 0 || idx > this.length) return false;
+        if (idx === 0) return !!this.unshift(value);
+        if (idx === this.length) return !!this.push(value);
+        let newNode = new Node(value);
+        let beforeNode = this.get(idx-1);
+        let afterNode = beforeNode.next;
+        beforeNode.next = newNode, newNode.previous = beforeNode;
+        newNode.next = afterNode, afterNode.previous = newNode;
+        this.length ++;
+        return true;
+
+
+
+
+        
+        // if(idx === 0){
+        //     this.unshift(value);
+        //     return ++this.length;
+        // } else if (idx === this.length){
+        //     this.push(value);
+        //     return ++this.length;
+        // } else{
+        //     let foundNode = this.get(idx);
+        //     if(foundNode){
+        //         let newNode = new Node(value);
+        //         let prevNode = foundNode.previous;
+    
+        //         newNode.next = foundNode;
+        //         foundNode.previous = newNode;
+    
+        //         prevNode.next = newNode;
+        //         newNode.previous = prevNode;
+        //         return ++this.length;
+        //     }
+        // }
+        // return false;
+    }
+    //REMOVE - TAKES IN AN INDEX, REMOVES THE NODE AT THAT POSITION..
+    //USE OUR GET FUNCTION TO HELP..
+    remove(idx){
+        //TEACHERS SOLUTION
+        if (idx < 0 || idx >= this.length) return false;
+        if(idx === 0) return this.shift();
+        if(idx === this.length - 1) return this.pop();
+        let removedNode = this.get(idx);
+        let beforeNode = removedNode.previous;
+        let afterNode = removedNode.next;
+        beforeNode.next = afterNode;
+        afterNode.previous = beforeNode;
+        // removedNode.previous.next = removedNode.next;
+        // removedNode.next.previous = removedNode.previous;
+        removedNode.next = null;
+        removedNode.previous = null;
+        this.length--;
+        return removedNode;
+        
+        // if(idx < 0 || idx > this.length) return false;
+        // if (idx === 0) return this.shift(idx);
+        // if (idx === this.length) return this.pop(idx);
+        // let removedNode = this.get(idx);
+        // let prevNode = removedNode.previous;
+        // let nextNode = removedNode.next;
+        // prevNode.next = nextNode, nextNode.previous = prevNode;
+        // this.length--;
+        // return removedNode;
+    }
 }
+
+
+
+//BIG O OF DOUBLY LINKED LISTS
+    //INSERTION - O(1) // SAME AS SINGLY LINKED LISTS
+    //REMOVAL - O(1) // ALWAYS CONSTANT, NOT CASE FOR SINGLY LINKED LIST (IF REMOVE FROM END HAVE TO ITERATE ALL THE WAY THROUGH)
+    //SEARCHING - O(N) //TECHNICALLY O(N/2) -> BUT THAT'S STIL O(N) IN THE GRAND SCHEME OF THINGS.
+    //ACCESS - O(N)
+
+//BASICALLY THE SAME AS SLL, BUT WITH ADDITIONAL POINTERS TO PREVIOUS NODE.
+    //EASIER TO DO UNDO/REDO WITH DOUBLY LINKED LISTS.. JUST POP THE TAIL OFF
+    //FIND THINGS IN HALF THE TIME (BUT THESE EXTRA POINTERS TAKE UP MORE MEMORY)
+     
